@@ -1,0 +1,367 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TSAR-IT | Course Registration-Form</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+      :root {
+        --primaryBackground: #212529;
+      }
+      ::selection {
+        background-color: #050540;
+        color: #fff;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        /* line-height: 1.1; */
+        font-family: "Poppins", sans-serif;
+        font-weight: 500;
+        /* text-transform: capitalize; */
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      :before,
+      :after {
+        box-sizing: border-box;
+      }
+      ::-webkit-scrollbar {
+        width: 18px;
+        background-color: #ffffff;
+      }
+      ::-webkit-scrollbar-track {
+        border-radius: 0;
+        background-color: #05053930;
+      }
+      ::-webkit-scrollbar-thumb {
+        border-radius: 0;
+        background: linear-gradient(200deg, #040429 30%, #28286efe);
+      }
+      .div {
+        display: flex;
+        justify-content: center;
+      }
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+      .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 30px 0;
+      }
+      .form-sec-1 {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        padding: 5px 5px;
+      }
+      .form-sec-1:focus {
+        background-color: #090d7c;
+      }
+      .block-address-city {
+        margin: 5px 10px;
+        display: flex;
+        gap: 10px;
+      }
+      .block-flex-addr {
+        width: 100%;
+      }
+      .block {
+        display: flex;
+        flex-direction: column;
+        width: 46%;
+        margin: 10px 10px;
+      }
+      form {
+        border: 1px solid #000;
+        width: 70%;
+        padding: 30px;
+      }
+      label {
+        margin: 2px 0;
+        margin-top: 20px;
+        font-weight: 400;
+        font-size: 16px;
+      }
+      input,
+      select,
+      textarea {
+        padding: 8px 15px;
+        width: 100%;
+        border: 2px solid #ccc;
+        outline: none;
+        caret-color: #090d7c;
+        transition: all 0.1s linear;
+      }
+      input:hover,
+      select:hover,
+      textarea:hover {
+        border: 2px solid #6a6aff;
+        box-shadow: 0 1px 4px 1px #babaff;
+      }
+      input:focus {
+        border: 2px solid #3d43ea;
+        box-shadow: 0 1px 4px 1px #bdbfff;
+      }
+      input:focus .form-sec-1 {
+        background-color: red;
+      }
+      .form-sec-2 {
+        width: 100%;
+        margin: 0;
+      }
+      .block-address {
+        margin: 10px;
+      }
+      .block-address-city {
+        display: flex;
+      }
+      .block-email {
+        display: flex;
+      }
+      select,
+      option {
+        width: 100%;
+      }
+      textarea,
+      .label-textar {
+        margin: 0 10px;
+      }
+      .active {
+        background-color: #f4f4ff;
+      }
+      .submit {
+        padding: 6px 40px;
+        margin: 30px 0 0 0;
+        background: #03043252;
+        border: 1px solid #000;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: all 0.2s linear;
+      }
+      .submit:hover {
+        background-color: #050540;
+        color: #fff;
+      }
+      .whitText {
+        margin: 10px 0;
+        font-size: 12px;
+        color: #616161;
+        text-align: center;
+      }
+      .selfie {
+        padding: 6px 20px;
+        margin: 10px 0;
+        cursor: pointer;
+        background-color: rgba(128, 0, 128, 0.197);
+        color: purple;
+        border: 1px solid purple;
+        border-radius: 3px;
+        transition: all 0.2s linear;
+      }
+      .selfie:hover {
+        background-color: purple;
+        color: #fff;
+      }
+      /* toast notify */
+    #toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    z-index: 1;
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+.qr-img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+    </style>
+    <script
+      src="https://kit.fontawesome.com/06a08d1706.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <section>
+      <div class="div">
+        <div class="form-container">
+          <form method="post" action="" id="myForm" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="header">
+              <img src="./media/TSAR-IT.png" alt="TSAR-IT" style="width: 20%" />
+            </div>
+            <div>
+              <p class="whitText">
+                Fill out the form carefully for registration
+              </p>
+            </div>
+            <div class="form-sec-1">
+              <div class="block">
+                <label for="firstname">First Name</label>
+                <input
+                  type="text"
+                  name="firstname"
+                  id="firstname"
+                  required
+                  autocomplete="off"
+                />
+              </div>
+              <div class="block">
+                <label for="">Last Name</label>
+                <input type="text" name="last-name" id="" required autocomplete="off" />
+              </div>
+              <div class="block">
+                <label for="">date</label>
+                <input type="date" name="date" id="" required autocomplete="off" />
+              </div>
+              <div class="block">
+                <label for="stdphno">Gender</label>
+                <select name="gender" id="">
+                  <option value="" selected disabled>select Gender</option>
+                  <option value="male">male</option>
+                  <option value="fe-male">fe-male</option>
+                </select>
+              </div>
+            </div>
+            <!-- section - 2 -->
+            <div class="form-sec-2">
+              <div class="block-address">
+                <label for="">Address</label>
+                <input
+                  type="text"
+                  name="address"
+                  id=""
+                  required
+                  placeholder="Street Address"
+                />
+              </div>
+              <div class="block-address">
+                <input
+                  type="text"
+                  name="address_2"
+                  id=""
+                  required
+                  placeholder="Street Address 2"
+                />
+              </div>
+              <div class="block-address-city">
+                <div class="block-flex-addr">
+                  <input
+                    type="text"
+                    name="city"
+                    id=""
+                    required
+                    placeholder="city"
+                  />
+                </div>
+                <div class="block-flex-addr">
+                  <input
+                    type="text"
+                    name="postal"
+                    id=""
+                    required
+                    placeholder="Postal / Zip Code"
+                  />
+                </div>
+              </div>
+              <div class="block-address">
+                <input
+                  type="text"
+                  name="state"
+                  id=""
+                  required
+                  placeholder="State / Province"
+                />
+              </div>
+            </div>
+            <!-- section - 3 -->
+            <div class="block-email">
+              <div class="block">
+                <label for="stdemail">student email</label>
+                <input
+                  type="email"
+                  name="stdemail"
+                  id="stdemail"
+                  placeholder="example@example.com"
+                />
+              </div>
+              
+
+              <div class="block">
+                <label for="">Phone No.</label>
+                <input type="text" name="phone" id="" required autocomplete="off" />
+              </div>
+            </div>
+            <div class="block course" style="width: 100%">
+              <label for="">Courses</label>
+              <select name="course" id="">
+                {% for names in languages %}
+                <option value="{{ names }}">{{ names }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="block" style="width: 100%">
+              <label for="">Referred By (HR Name)</label>
+              <input type="text" name="hr_name" id="" />
+            </div>
+            <label for="msg" class="label-textar">Additional Comments</label
+            ><br />
+            <textarea name="msg" id="msg" cols="40" rows="4"></textarea>
+            <!-- code for taking user -->
+            <div class="block" style="width: 100%">
+              <label for="">upload image</label>
+              <input type="file" name="profile_img" id="" accept=".jpg, .jpeg, .png" />
+            </div>
+            <div class="qr-scanner">
+              <div class="qr-img">
+                <img src="./media/qr-scanner.png" alt="TSAR-IT || QR-code"  width="40%"/>
+                <h2>Registration Fee : ₹200/-
+                <p style="font-size:13px; font-weight:400; text-align:center;">Amount Is Not Refundable.*</p>
+                </h2>
+                
+              </div>
+              <div class="text">scan for pay</div>
+            </div>
+            <div class="block" style="width: 100%">
+              <p>Enter transaction ID : <input type="text" name="trans_id" id="" /></p>
+            </div>
+            <center><button class="submit">Submit</button></center>
+          </form>
+        </div>
+      </div>
+
+      
+    </section>
+    <script>
+      let input = document.getElementsByTagName("input");
+      let bg = document.querySelector(".form-sec-1");
+
+      input.onclick = () => {
+        if (bg.classList == "form-sec-1") {
+          bg.classList.add("active");
+          console.log("hello");
+        }
+      };
+    </script>
+  </body>
+</html>

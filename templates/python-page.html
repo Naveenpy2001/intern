@@ -1,0 +1,1490 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/06a08d1706.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0"
+    />
+    <script src='{% static "./JavaScript/chatBot.js" %}' defer></script>
+    <title>python</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+      :root {
+        --primaryBackground: #212529;
+      }
+      ::selection {
+        background-color: #050540;
+        color: #fff;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        /* line-height: 1.1; */
+        font-family: "Raleway", "Poppins", sans-serif;
+        font-weight: 500;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      :before,
+      :after {
+        box-sizing: border-box;
+      }
+      ::-webkit-scrollbar {
+        width: 18px;
+        background-color: #ffffff;
+      }
+      ::-webkit-scrollbar-track {
+        border-radius: 0;
+        background-color: #05053930;
+      }
+      ::-webkit-scrollbar-thumb {
+        border-radius: 0;
+        background: linear-gradient(200deg, #040429 30%, #28286efe);
+      }
+      /* chatbot */
+      .chatbot-toggler {
+        position: fixed;
+        bottom: 30px;
+        right: 35px;
+        outline: none;
+        border: none;
+        height: 50px;
+        width: 50px;
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: #724ae8;
+        transition: all 0.2s ease;
+      }
+      body.show-chatbot .chatbot-toggler {
+        transform: rotate(90deg);
+      }
+      .chatbot-toggler span {
+        color: #fff;
+        position: absolute;
+      }
+      .chatbot-toggler span:last-child,
+      body.show-chatbot .chatbot-toggler span:first-child {
+        opacity: 0;
+      }
+      body.show-chatbot .chatbot-toggler span:last-child {
+        opacity: 1;
+      }
+      .chatbot {
+        position: fixed;
+        right: 35px;
+        bottom: 90px;
+        width: 420px;
+        background: #fff;
+        border-radius: 15px;
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(0.5);
+        transform-origin: bottom right;
+        box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1),
+          0 32px 64px -48px rgba(0, 0, 0, 0.5);
+        transition: all 0.1s ease;
+      }
+      body.show-chatbot .chatbot {
+        opacity: 1;
+        pointer-events: auto;
+        transform: scale(1);
+      }
+      .chatbot header {
+        padding: 16px 0;
+        position: relative;
+        text-align: center;
+        color: #fff;
+        background: #724ae8;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .chatbot header span {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        display: none;
+        cursor: pointer;
+        transform: translateY(-50%);
+      }
+      header h2 {
+        font-size: 1.4rem;
+      }
+      .chatbot .chatbox {
+        overflow-y: auto;
+        height: 510px;
+        padding: 30px 20px 100px;
+      }
+      .chatbot :where(.chatbox, textarea)::-webkit-scrollbar {
+        width: 6px;
+      }
+      .chatbot :where(.chatbox, textarea)::-webkit-scrollbar-track {
+        background: #fff;
+        border-radius: 25px;
+      }
+      .chatbot :where(.chatbox, textarea)::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 25px;
+      }
+      .chatbox .chat {
+        display: flex;
+        list-style: none;
+      }
+      .chatbox .outgoing {
+        margin: 20px 0;
+        justify-content: flex-end;
+      }
+      .chatbox .incoming span {
+        width: 32px;
+        height: 32px;
+        color: #fff;
+        cursor: default;
+        text-align: center;
+        line-height: 32px;
+        align-self: flex-end;
+        background: #724ae8;
+        border-radius: 4px;
+        margin: 0 10px 7px 0;
+      }
+      .chatbox .chat p {
+        white-space: pre-wrap;
+        padding: 12px 16px;
+        border-radius: 10px 10px 0 10px;
+        max-width: 75%;
+        color: #fff;
+        font-size: 0.95rem;
+        background: #0d084d;
+      }
+      .chatbox .incoming p {
+        border-radius: 10px 10px 10px 0;
+      }
+      .chatbox .chat p.error {
+        color: #721c24;
+        background: #f8d7da;
+      }
+      .chatbox .incoming p {
+        color: #000;
+        background: #f2f2f2;
+      }
+      .chatbot .chat-input {
+        display: flex;
+        gap: 5px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background: #fff;
+        padding: 3px 20px;
+        border-top: 1px solid #ddd;
+      }
+      .chat-input textarea {
+        height: 55px;
+        width: 100%;
+        border: none;
+        outline: none;
+        resize: none;
+        max-height: 180px;
+        padding: 15px 15px 15px 0;
+        font-size: 0.95rem;
+      }
+      .chat-input span {
+        align-self: flex-end;
+        color: #0c0341;
+        cursor: pointer;
+        height: 55px;
+        display: flex;
+        align-items: center;
+        visibility: hidden;
+        font-size: 1.35rem;
+      }
+      .chat-input textarea:valid ~ span {
+        visibility: visible;
+      }
+
+      @media (max-width: 490px) {
+        .chatbot-toggler {
+          right: 20px;
+          bottom: 20px;
+        }
+        .chatbot {
+          right: 0;
+          bottom: 0;
+          height: 100%;
+          border-radius: 0;
+          width: 100%;
+        }
+        .chatbot .chatbox {
+          height: 90%;
+          padding: 25px 15px 100px;
+        }
+        .chatbot .chat-input {
+          padding: 5px 15px;
+        }
+        .chatbot header span {
+          display: block;
+        }
+      }
+      /* end chatbot Styles */
+      .links {
+        display: flex;
+        gap: 10px;
+        margin: 10px 0;
+      }
+      .links-1 {
+        text-decoration: none;
+        color: #040429;
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .navbar {
+        background: #ffffff;
+        color: #000000;
+        z-index: 1;
+      }
+
+      .main-nav {
+        display: flex;
+        padding: 10px 300px;
+        border-bottom: 1px solid #000;
+      }
+      .logo,
+      .nav {
+        width: 100%;
+      }
+      .logo {
+        width: 40%;
+      }
+      .flex {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+      }
+      .social-links {
+        display: flex;
+        justify-content: end;
+        margin-left: auto;
+        gap: 10px;
+        margin: 10px 0;
+      }
+      a {
+        text-decoration: none;
+      }
+      .links-to-app {
+        font-size: 24px;
+        color: #000000;
+      }
+      main {
+        padding: 10px 300px;
+      }
+      .pages {
+        color: #000;
+      }
+      .ul,
+      .ol {
+        list-style: circle;
+      }
+      .banner {
+        padding: 80px 170px;
+        background: linear-gradient(
+            to right,
+            rgb(0, 0, 0),
+            rgba(0, 0, 0, 0.501),
+            rgba(0, 0, 0, 0.029)
+          ),
+          url("./media/python\ banner.webp") center/cover no-repeat;
+        color: #fff;
+        z-index: -1;
+      }
+      .title-course,
+      .code,
+      .h2,
+      .list {
+        margin: 25px 0;
+      }
+      .title-course {
+        margin: 50px 0;
+        font-size: 40px;
+      }
+      .h2 {
+        margin: 25px 0;
+      }
+      .list {
+        margin: 30px 0;
+        width: 70%;
+      }
+      .list {
+        margin: 5px 0;
+      }
+      .container-bottom {
+        margin: 50px 0;
+        display: flex;
+      }
+
+      .col-1 {
+        display: flex;
+        width: 250px;
+        border: 1px solid #5f5f5f;
+        padding: 10px 10px;
+        margin: 0 5px;
+      }
+      .icon {
+        width: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .user {
+        font-size: 180%;
+      }
+      .text-span {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .center-btn {
+        display: flex;
+        margin-left: 5%;
+        gap: 50px;
+      }
+      .span {
+        margin: 4px 0;
+      }
+      .quick-btn {
+        padding: 10px 30px;
+        border: 3px solid inherit;
+        background-color: #08084c;
+        color: #fff;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: all 0.2s linear;
+      }
+      .quick-btn:hover {
+        background-color: #fff;
+        color: #000000;
+      }
+      /* pop up form styles */
+      .flex-form {
+        display: none;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 2;
+      }
+      .pop-up-form {
+        width: 35%;
+        border: 1px solid #000;
+        padding: 40px;
+        background-color: #fff;
+        position: relative;
+        /* max-height: 400px; */
+        z-index: 3;
+      }
+      .cancel {
+        position: absolute;
+        top: 3%;
+        right: 5%;
+        cursor: pointer;
+      }
+      .cancel:hover {
+        color: red;
+        transform: scale(1.4);
+      }
+      .user-input {
+        padding: 6px 20px;
+        width: 100%;
+      }
+      .pop-block {
+        margin: 10px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .check {
+        margin: 10px 0;
+        font-size: 12px;
+        display: flex;
+        gap: 5px;
+      }
+      .terms {
+        color: #ff0000;
+        font-weight: 600;
+      }
+      .pop-btn {
+        margin: 10px 0;
+        display: flex;
+        justify-content: center;
+      }
+      .form-background {
+        border: 1px solid #000;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background: #000000c3;
+        padding: 220px;
+        z-index: 4;
+      }
+      .form-submit {
+        padding: 8px 40px;
+        border: 1px solid #000;
+        background-color: #5050ff;
+        color: #fff;
+        border-radius: 3px;
+        transition: all 0.2s linear;
+        cursor: pointer;
+      }
+      .form-submit:hover {
+        background-color: #050540;
+      }
+      .section {
+        background-color: #12132d;
+        padding: 20px 0;
+      }
+      .center-select {
+        display: flex;
+        justify-content: center;
+      }
+      .select-contain {
+        display: flex;
+        width: 40%;
+        justify-content: center;
+        align-items: center;
+        margin: 10px 0;
+        padding: 25px 0;
+        background-color: #fff;
+        flex-direction: column;
+      }
+      .select-loc {
+        padding: 5px 20px;
+        border-radius: 5px;
+      }
+      /* schedule-form */
+      .schedule-form {
+        position: fixed;
+        top: -30%;
+        z-index: 5;
+        width: 100%;
+        display: none;
+        justify-content: center;
+        padding: 300px 30px;
+        background-color: #00000081;
+      }
+      .overlay {
+        transform: translateY(0);
+        scale: 1;
+        animation: formLand 0.05s ease-in;
+        visibility: visible;
+      }
+      @keyframes formLand {
+        from {
+          transform: translateY(-1700px);
+          scale: 0;
+          visibility: hidden;
+        }
+        to {
+          transform: translateY(0);
+          scale: 1;
+          visibility: visible;
+        }
+      }
+      /* sub nav */
+      .sub-nav {
+        padding: 0 30px;
+        display: flex;
+        gap: 15px;
+        border: 1px solid #000;
+        position: sticky;
+        top: 0;
+        background-color: #fff;
+        z-index: 1;
+      }
+      .sub-links {
+        color: #000;
+        padding: 10px 5px;
+      }
+      .sub-links:hover {
+        background-color: #000045;
+        padding: 10px 5px;
+        color: #fff;
+      }
+      /* after sub nav */
+      .about-course {
+        margin: 40px 0;
+      }
+      .h3 {
+        margin: 10px 0;
+      }
+      .desc {
+        font-size: 30px;
+        margin: 50px 0;
+        padding: 20px 15px;
+        border-left: 4px solid #060666;
+      }
+      .text-desc {
+        font-size: 15px;
+        color: #646464;
+        margin: 10px 0;
+      }
+      .skills-img {
+        width: 100%;
+      }
+      .sec {
+        padding: 5px 150px;
+      }
+      details {
+        padding: 5px 5px;
+        margin: 0 60px;
+      }
+      details[open] summary {
+        margin: 15px 0;
+        transition: all 0.2s linear;
+      }
+      details > ul > li {
+        cursor: pointer;
+        margin: 5px 0;
+      }
+      .c-title {
+        font-weight: 800;
+      }
+      .course-cirriculum {
+        display: flex;
+        position: sticky;
+        top: 0;
+      }
+      .course-left {
+        border: 1px solid #000;
+        width: 100%;
+        position: sticky;
+        top: 0;
+      }
+      .course-right {
+        border: 1px solid #000;
+        width: 100%;
+      }
+      .tabs-reveal {
+        display: none;
+        height: 400px;
+        border: 1px solid #000;
+        padding: 30px;
+        margin: 20px;
+        text-align: center;
+      }
+      .active-tab {
+        display: block;
+      }
+      /* smooth transition */
+      .reveal {
+        transform: translateY(30px);
+        opacity: 0;
+        transition: all 0.5s linear;
+      }
+      .reveal.active {
+        transform: translateX(0);
+        opacity: 1;
+        overflow: hidden;
+      }
+      .animation {
+        transform: translateY(0);
+        opacity: 1;
+        animation: res 0.4s linear;
+      }
+      @keyframes res {
+        from {
+          transform: translateY(50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      .schedule-banner {
+        background: linear-gradient(to right, #000000, #000000c4, #00000068),
+          url("./media/form-banner.jpg") center/cover no-repeat;
+        color: #fff;
+      }
+      .enqury-banner {
+        background: linear-gradient(to right, #00000041, #0000003a, #0000003c),
+          url("./media/enqury-banner.jpg ") center/cover no-repeat;
+        color: #fff;
+      }
+      /* enroll styles */
+      .enroll-container {
+        display: none;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        background-color: #0000008a;
+        width: 100%;
+        padding: 10% 0 40% 0;
+        z-index: 7;
+      }
+      .enroll {
+        background-color: #fff;
+        padding: 20px 60px;
+        width: 40%;
+        position: relative;
+      }
+      .cancel-btn-enr {
+        position: absolute;
+        top: 0%;
+        right: 0%;
+        font-size: 16px;
+        transition: all 0.2s linear;
+        background-color: green;
+        color: #fff;
+        padding: 3px 10px;
+        padding-bottom: 5px;
+        cursor: pointer;
+      }
+      .cancel-btn-enr:hover {
+        background-color: red;
+      }
+      .offers-contain {
+        padding: 15px 0;
+        margin: 5px 0;
+        display: flex;
+      }
+      .offers-left {
+        width: 100%;
+      }
+      .price-offer,
+      .actual-price {
+        width: 30%;
+        display: block;
+        float: left;
+        margin: 10px 20px;
+        font-size: 20px;
+        position: relative;
+        text-align: center;
+        font-family: poppins;
+        font-size: 16px;
+      }
+      .price-offer {
+        width: 25%;
+        text-align: center;
+      }
+      .offer {
+        font-size: 20px;
+      }
+      .price-offer::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        height: 2px;
+        width: 100%;
+        background-color: red;
+        padding: 0 25px;
+        left: -1px;
+        rotate: -12deg;
+      }
+      .offer-enroll-btn {
+        width: 20%;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+      }
+      .center-btn-2 {
+        padding: 8px 40px;
+        border: 1px solid #000;
+        background-color: #ffffff;
+        color: #000000;
+        border-radius: 3px;
+        transition: all 0.2s linear;
+        cursor: pointer;
+      }
+      .center-btn-2:hover {
+        background-color: #050540;
+      }
+      .enroll-btn-2 {
+        padding: 8px 40px;
+        border: 1px solid #000;
+        background-color: #ffffff;
+        color: #000000;
+        border-radius: 3px;
+        transition: all 0.2s linear;
+        cursor: pointer;
+      }
+      .enroll-btn-2:hover {
+        background-color: #050540;
+        color: #fff;
+      }
+      .enroll-button {
+        padding: 8px 40px;
+        border: 1px solid #000;
+        background-color: #002de1;
+        color: #ffffff;
+        border-radius: 3px;
+        transition: all 0.2s linear;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      
+    </header>
+    <nav class="main-nav animation">
+      <div class="logo animation">
+        <h4 class="phno">+91 999999999</h4>
+        <img src="./media/TSAR-IT.png" alt="c-logo" class="logo" />
+      </div>
+      <div class="nav animation">
+        <div class="social-links">
+          <a href="" class="links-to-app">
+            <i class="fa-brands fa-facebook"></i>
+          </a>
+          <a href="" class="links-to-app"
+            ><i class="fa-brands fa-instagram"></i
+          ></a>
+          <a href="" class="links-to-app"
+            ><i class="fa-brands fa-linkedin"></i
+          ></a>
+          <a href="" class="links-to-app"
+            ><i class="fa-brands fa-youtube"></i
+          ></a>
+          <a href="" class="links-to-app"
+            ><i class="fa-brands fa-twitter"></i
+          ></a>
+        </div>
+
+        <!-- all courses code with flex class -->
+        <div class="nav-links">
+          <div class="courses">
+            <!-- <a href="" class="blog"><h4>Blog</h4></a>  -->
+          </div>
+        </div>
+      </div>
+    </nav>
+    <main class="animation">
+      <a href="" class="pages">Home <i class="fa-solid fa-angle-right"></i></a>
+      <a href="/internshipPage" class="pages"> Internship</a>
+      <i class="fa-solid fa-angle-right"></i> Python
+    </main>
+    <hr />
+    <section>
+      <div class="banner animation">
+        <div class="container-main animation">
+          <h1 class="title-course animation">Learning Python</h1>
+          <p class="code"></p>
+          <h2 class="h2">Python Course</h2>
+          <p class="list animation">
+            Python remains a widely used and versatile programming language in
+            the present market. Known for its simplicity and readability, Python
+            finds applications in web development, data science, machine
+            learning, artificial intelligence, and automation. Its popularity in
+            education is driven by its ease for beginners. With an active
+            community and a rich ecosystem of libraries, Python is
+            cross-platform and highly sought after in the job market. Regular
+            updates from the Python Software Foundation ensure the language's
+            continuous development, contributing to its ongoing significance
+            across diverse domains.
+          </p>
+        </div>
+        <div class="container-bottom animation">
+          <div class="col-1 animation">
+            <div class="icon">
+              <i class="fa-solid user fa-user-graduate"></i>
+            </div>
+            <div class="text-span">
+              <span class="span">Students Enrolled</span>
+              <spa class="span">1080</spa>
+            </div>
+          </div>
+          <div class="col-1 animation">
+            <div class="icon">
+              <i class="fa-solid user fa-users"></i>
+            </div>
+            <div class="text-span">
+              <span class="span">reviews</span>
+              <span class="span"
+                ><span class="material-symbols-outlined user">
+                  stars
+                </span></span
+              >
+            </div>
+          </div>
+          <div class="col-1 animation">
+            <div class="icon">
+              <i class="fa-regular user fa-clock"></i>
+            </div>
+            <div class="text-span">
+              <span class="span">Duration</span>
+              <spa class="span">2 Months</spa>
+            </div>
+          </div>
+        </div>
+        <div class="form-pop">
+          <div class="center-btn">
+            <button class="enroll-btn-2" onclick="enrollShow()">
+              Enroll Now
+            </button>
+            <button class="quick-btn" onclick="showForm()">
+              Quick Enquiry
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="flex-form" id="pop-form">
+        <div class="form-background">
+          <form action="#" class="pop-up-form overlay enqury-banner">
+            <span class="cancel" onclick="closeForm()">✕</span>
+
+            <img src="./media/TSAR-IT.png" alt="c-logo" width="20%" />
+            <h1 class="pop-h1">Quick Enquiry</h1>
+            <div class="pop-block">
+              <input
+                type="text"
+                placeholder="Name*"
+                class="user-input"
+                required
+                autocomplete="off"
+                name="username"
+                id="username"
+              />
+            </div>
+            <div class="pop-block">
+              <input
+                type="text"
+                placeholder="Email*"
+                class="user-input"
+                required
+                autocomplete="off"
+                name="useremail"
+                id="useremail"
+              />
+            </div>
+            <div class="pop-block">
+              <input
+                type="text"
+                placeholder="Mobile No.*"
+                class="user-input"
+                required
+                autocomplete="off"
+                name="userphno"
+                id="userphno"
+              />
+            </div>
+            <div class="pop-block">
+              <select name="options" id="options" class="user-input">
+                <option value="">Looking for</option>
+                <option value="">Self</option>
+                <option value="">Others</option>
+              </select>
+            </div>
+            <div class="check">
+              <input type="checkbox" name="usercheck" id="usercheck" />
+              <span
+                >I hearby agree to the
+                <a href="#" class="terms">Terms and Condtions</a> and
+                <a href="#" class="terms">Privacy Policy</a> of TSAR IT</span
+              >
+            </div>
+            <div class="pop-btn">
+              <button class="form-submit">submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <section style="margin: 50px 0" class="reveal section">
+      <center>
+        <h1 style="color: #fff">Up Coming Batches</h1>
+        <br />
+      </center>
+      <div class="center-select">
+        <div class="select-contain reveal">
+          <div>
+            <span class="select">Select Your Country</span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select name="" id="select-country" class="select-loc">
+              <option value="" id="option">select</option></select
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select name="" id="select-town" class="select-loc">
+              <option value="">select</option>
+            </select>
+          </div>
+          <br />
+          <center>
+            Can't find convenient schedule?&nbsp;&nbsp;
+            <button onclick="showScheduleForm()" class="quick-btn">
+              Click Here
+            </button>
+          </center>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="rate-container reveal">
+        <div class="rate-col-1"></div>
+        <div class="rate-col-2"></div>
+      </div>
+    </section>
+
+    <nav class="sub-nav reveal">
+      <a href="#course-descr" class="sub-links">course description</a>
+      <a href="#course-cirriculum" class="sub-links">course Cirriculum</a>
+      <a href="#why-trsar-it" class="sub-links">Why TSAR-IT</a>
+      <a href="" class="sub-links">Mock Test</a>
+    </nav>
+    <section class="sec reveal" style="padding-bottom: 0px" id="course-descr">
+      <div class="about-course reveal">
+        <h1 class="desc">Course Description</h1>
+        <h3 class="h3">What Is Python?.</h3>
+        <p class="text-desc">
+          Python has become one of the most widely used programming languages,
+          and its popularity continues to grow due to its simplicity,
+          versatility, and the thriving ecosystem of libraries and frameworks.
+        </p>
+      </div>
+      <div class="about-course reveal">
+        <h3 class="h3">Why Python?</h3>
+        <p class="text-desc reveal">
+          Python is a popular programming language that is used by many data
+          scientists and programmers because it is easy to learn and use, has a
+          large community of supporters, and is supported by many corporate
+          sponsors.
+        </p>
+        <p class="text-desc reveal">
+          Once you have learned the basics of Python, you can start using it to
+          develop your own applications. There are many libraries and frameworks
+          available for Python that can help you with a variety of tasks, such
+          as web development, data science, and machine learning.
+        </p>
+      </div>
+    </section>
+
+    <section class="sec reveal" style="padding-top: 5px">
+      <h1 class="desc reveal">Learning Path</h1>
+      <div>
+        <img src="./media/python-2.png" alt="skills-set" class="skills-img" />
+      </div>
+    </section>
+    <section class="sec reveal">
+      <h1 class="desc reveal">Career Opportunity</h1>
+      <div>
+        <img src="./media/python-why.png" alt="skills-set" />
+      </div>
+    </section>
+    <section class="sec reveal" id="why-trsar-it">
+      <h1 class="desc reveal">Why TSAR-IT</h1>
+      <div>
+        <img src="./media/why-tsar-it.png" alt="skills-set" />
+      </div>
+    </section>
+    <div class="schedule-form" id="sheduleForm">
+      <form action="#" class="pop-up-form overlay schedule-banner">
+        <span class="cancel" onclick="closeScheduleForm()">✕</span>
+
+        <img src="./media/TSAR-IT.png" alt="c-logo" width="20%" />
+        <h1 class="pop-h1" style="font-size: 20px">
+          Let Us Know Your Convenient Schedule
+        </h1>
+        <div class="pop-block">
+          <input
+            type="text"
+            placeholder="Name*"
+            class="user-input"
+            required
+            autocomplete="off"
+            name="username"
+            id="username"
+          />
+        </div>
+        <div class="pop-block">
+          <input
+            type="text"
+            placeholder="Email*"
+            class="user-input"
+            required
+            autocomplete="off"
+            name="useremail"
+            id="useremail"
+          />
+        </div>
+        <div class="pop-block">
+          <input
+            type="text"
+            placeholder="Mobile No.*"
+            class="user-input"
+            required
+            autocomplete="off"
+            name="userphno"
+            id="userphno"
+          />
+        </div>
+        <div class="pop-block">
+          <input
+            type="date"
+            class="user-input"
+            required
+            autocomplete="off"
+            name="userdaate"
+            id="userdate"
+          />
+        </div>
+        <div class="pop-block">
+          <select name="options" id="options" class="user-input">
+            <option value="">Looking for</option>
+            <option value="">Self</option>
+            <option value="">Others</option>
+          </select>
+        </div>
+        <div class="check">
+          <input type="checkbox" name="usercheck" id="usercheck" />
+          <span
+            >I hearby agree to the
+            <a href="#" class="terms">Terms and Condtions</a> and
+            <a href="#" class="terms">Privacy Policy</a> of TSAR IT</span
+          >
+        </div>
+        <div class="pop-btn">
+          <button class="form-submit">submit</button>
+        </div>
+      </form>
+    </div>
+
+    <section
+      class="sec reveal"
+      id="course-cirriculum"
+      style="background-color: #ebebeb; padding: 20px"
+    >
+      <h1 class="desc">Course Curriculum</h1>
+      <div class="course-cirriculum">
+        <div class="course-left">
+          <div>
+            <details>
+              <summary>
+                Module :
+                <span class="c-title">Introduction to Python</span>
+              </summary>
+              <ul style="margin-left: 60px; padding: 0px 0; list-style: disc">
+                <li onclick="showTabs('tab1')">
+                  Installing Python and setting up the development environment
+                </li>
+                <li onclick="showTabs('tab2')">Basic syntax and data types</li>
+                <li onclick="showTabs('tab3')">Variables and operators</li>
+                <li onclick="showTabs('tab4')">Input and output</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>
+                Module :
+                <span class="c-title">Control Structures</span>
+              </summary>
+              <ul style="margin-left: 60px; padding: 0px 0; list-style: disc">
+                <li onclick="showTabs('tab5')" style="margin: 5px 0">
+                  Conditional statements (if, elif, else)
+                </li>
+                <li onclick="showTabs('tab6')">Loops (for, while)</li>
+                <li onclick="showTabs('tab7')">
+                  Break and continue statements
+                </li>
+                <li onclick="showTabs('tab8')">
+                  Exception handling (try, except, finally)
+                </li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>
+                Module :
+                <span class="c-title">Data Structures</span>
+              </summary>
+              <ul style="margin-left: 60px; padding: 0px 0; list-style: disc">
+                <li onclick="showTabs('tab9')" style="margin: 5px 0">Lists</li>
+                <li onclick="showTabs('tab10')">Tuples</li>
+                <li onclick="showTabs('tab11')">Dictionaries</li>
+                <li onclick="showTabs('tab12')">Sets</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>
+                Module :
+                <span class="c-title">Functions</span>
+              </summary>
+              <ul style="margin-left: 60px; padding: 0px 0; list-style: disc">
+                <li onclick="showTabs('tab13')">Defining functions</li>
+                <li onclick="showTabs('tab14')">Parameters and arguments</li>
+                <li onclick="showTabs('tab15')">Returning values</li>
+                <li onclick="showTabs('tab16')">Scope of variables</li>
+                <li onclick="showTabs('tab17')">Lambda functions</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>
+                Module :
+                <span class="c-title">Modules and Packages</span>
+              </summary>
+              <ul style="margin-left: 60px; padding: 0px 0; list-style: disc">
+                <li onclick="showTabs('tab18')" style="margin: 5px 0">
+                  Importing modules
+                </li>
+                <li onclick="showTabs('tab19')">Creating and using packages</li>
+                <li onclick="showTabs('tab20')">
+                  Understanding the Python Standard Library
+                </li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>
+                Module :
+                <span class="c-title">Data Structures</span>
+              </summary>
+              <ul style="margin-left: 60px; padding: 0px 0; list-style: disc">
+                <li onclick="showTabs('tab21')" style="margin: 5px 0">Lists</li>
+                <li onclick="showTabs('tab22')">Tuples</li>
+                <li onclick="showTabs('tab23')">Dictionaries</li>
+                <li onclick="showTabs('tab24')">Sets</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>
+                Module :
+                <span class="c-title">File Handling</span>
+              </summary>
+              <ul style="margin-left: 60px; padding: 0px 0; list-style: disc">
+                <li onclick="showTabs('tab25')" style="margin: 5px 0">
+                  Opening and closing files
+                </li>
+                <li onclick="showTabs('tab26')">from and writing to files</li>
+                <li onclick="showTabs('tab27')">
+                  Working with different file formats (text files, CSV,
+                  JSON,etc.)
+                </li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>
+                Module :
+                <span class="c-title">Object-Oriented Programming (OOP)</span>
+              </summary>
+              <ul style="margin-left: 60px; padding: 0px 0; list-style: disc">
+                <li onclick="showTabs('tab28')" style="margin: 5px 0">
+                  Classes and objects
+                </li>
+                <li onclick="showTabs('tab29')">Attributes and methods</li>
+                <li onclick="showTabs('tab30')">Inheritance</li>
+                <li onclick="showTabs('tab31')">Polymorphism</li>
+                <li onclick="showTabs('tab32')">Encapsulation</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>
+                Module :
+                <span class="c-title">Advanced Topics</span>
+              </summary>
+              <ul style="margin-left: 60px; padding: 0px 0; list-style: disc">
+                <li onclick="showTabs('tab33')" style="margin: 5px 0">
+                  Decorators
+                </li>
+                <li onclick="showTabs('tab34')">Generators</li>
+                <li onclick="showTabs('tab35')">List comprehensions</li>
+                <li onclick="showTabs('tab36')">
+                  Error handling and debugging techniques
+                </li>
+                <li onclick="showTabs('tab37')">
+                  Working with databases (SQLite, MySQL, etc.)
+                </li>
+                <li onclick="showTabs('tab38')">
+                  Introduction to popular Python frameworks (Django, Flask,
+                  etc.)
+                </li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>
+                Module :
+                <span class="c-title">Project Work</span>
+              </summary>
+              <ul style="margin-left: 60px; padding: 0px 0; list-style: disc">
+                <li onclick="showTabs('tab39')" style="margin: 5px 0">
+                  Students work on small to medium-sized projects to apply their
+                  Python skills and reinforce concepts learned throughout the
+                  course.
+                </li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>
+                Module :
+                <span class="c-title">Final Assessment</span>
+              </summary>
+              <ul style="margin-left: 60px; padding: 0px 0; list-style: disc">
+                <li onclick="showTabs('tab40')" style="margin: 5px 0">
+                  A comprehensive assessment to evaluate students' understanding
+                  of Python concepts and their ability to write Python code
+                  effectively.
+                </li>
+              </ul>
+            </details>
+          </div>
+        </div>
+        <div class="course-right">
+          <div class="tabs-reveal active-tab" id="tab1">
+            <h1 class="h1">tabs1</h1>
+          </div>
+          <div class="tabs-reveal" id="tab2">
+            <h1 class="h1">tabs2</h1>
+          </div>
+          <div class="tabs-reveal" id="tab3">
+            <h1 class="h1">tabs3</h1>
+          </div>
+          <div class="tabs-reveal" id="tab4">
+            <h1 class="h1">tabs4</h1>
+          </div>
+          <div class="tabs-reveal" id="tab5">
+            <h1 class="h1">tabs5</h1>
+          </div>
+          <div class="tabs-reveal" id="tab6">
+            <h1 class="h1">tabs6</h1>
+          </div>
+          <div class="tabs-reveal" id="tab7">
+            <h1 class="h1">tabs7</h1>
+          </div>
+          <div class="tabs-reveal" id="tab8">
+            <h1 class="h1">tabs8</h1>
+          </div>
+          <div class="tabs-reveal" id="tab9">
+            <h1 class="h1">tabs9</h1>
+          </div>
+          <div class="tabs-reveal" id="tab10">
+            <h1 class="h1">tabs10</h1>
+          </div>
+          <div class="tabs-reveal" id="tab11">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab12">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab13">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab14">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab15">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab16">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab17">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab18">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab19">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab20">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab21">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab22">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab23">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab24">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab25">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab26">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab27">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab28">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab29">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab30">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab31">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab32">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab33">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab34">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab35">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab36">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab37">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab38">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab39">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab40">
+            <h1 class="h1">tabs</h1>
+          </div>
+          <div class="tabs-reveal" id="tab41">
+            <h1 class="h1">tabs</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- mock test columb -->
+    <section>
+      <div class="mock-test-ctnr">
+        <center><h1>mock test</h1></center>
+      </div>
+    </section>
+    <!-- pop up widgets -->
+    <div class="enroll-container">
+      <div class="enroll overlay">
+        <p class="cancel-btn-enr" onclick="closeEnroll()">✕</p>
+        <div class="offers-contain">
+          <div class="offers-left">
+            <h1 class="offer">Python + Django</h1>
+            <span class="price-offer">25,000</span>
+            <span class="actual-price">19,999</span>
+          </div>
+          <div class="offer-enroll-btn">
+            <a href="#"><button class="enroll-button">Enroll</button></a>
+          </div>
+        </div>
+        <hr />
+        <div class="offers-contain">
+          <div class="offers-left">
+            <h1 class="offer">Python + Pandas</h1>
+            <span class="price-offer">25,000</span>
+            <span class="actual-price">19,999</span>
+          </div>
+          <div class="offer-enroll-btn">
+            <a href="#"><button class="enroll-button">Enroll</button></a>
+          </div>
+        </div>
+        <hr />
+        <div class="offers-contain">
+          <div class="offers-left">
+            <h1 class="offer">Python + Flask</h1>
+            <span class="price-offer">25,000</span>
+            <span class="actual-price">19,999</span>
+          </div>
+          <div class="offer-enroll-btn">
+            <a href="#"><button class="enroll-button">Enroll</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- chatbot -->
+    <button class="chatbot-toggler">
+      <span class="material-symbols-rounded">mode_comment</span>
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <div class="chatbot">
+      <header>
+        <h2>Chatbot</h2>
+        <span class="close-btn material-symbols-outlined">close</span>
+      </header>
+      <ul class="chatbox">
+        <li class="chat incoming">
+          <span class="material-symbols-outlined">smart_toy</span>
+          <p>Hi there <br />How can I help you today?</p>
+        </li>
+      </ul>
+      <div class="chat-input">
+        <textarea
+          placeholder="Enter a message..."
+          spellcheck="false"
+          required
+        ></textarea>
+        <span id="send-btn" class="material-symbols-rounded">send</span>
+      </div>
+    </div>
+    <!-- end chat bot -->
+    <script src='{% static"./JavaScript/scroll.js" %}'></script>
+    <script>
+      function showForm() {
+        document.getElementById("pop-form").style.display = "block";
+      }
+
+      function closeForm() {
+        document.getElementById("pop-form").style.display = "none";
+      }
+
+      // schedule form landing....
+      const enrollShow = () => {
+        document.querySelector(".enroll-container").style.display = "flex";
+      };
+
+      const closeEnroll = () => {
+        document.querySelector(".enroll-container").style.display = "none";
+      };
+
+      const showScheduleForm = () => {
+        document.getElementById("sheduleForm").style.display = "flex";
+      };
+
+      const closeScheduleForm = () => {
+        document.getElementById("sheduleForm").style.display = "none";
+      };
+      // enroll tab show
+
+      // tabs content reveal
+
+      const showTabs = (tabsId) => {
+        const tab = document.querySelectorAll(".tabs-reveal");
+        tab.forEach((eachTab) => {
+          eachTab.classList.remove("active-tab");
+        });
+        const selectTab = document.getElementById(tabsId);
+        selectTab.classList.add("active-tab");
+      };
+    </script>
+  {% include 'footer.html' %}
+  </body>
+</html>

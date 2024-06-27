@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TSAR-IT | Corporate LOGIN</title>
+    <script
+      src="https://kit.fontawesome.com/06a08d1706.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+  :root {
+    --primaryBackground: #212529;
+  }
+  ::selection {
+    background-color: #050540;
+    color: #fff;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* line-height: 1.1; */
+    font-family: "Raleway", "Poppins", sans-serif;
+    font-weight: 500;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  :before,
+  :after {
+    box-sizing: border-box;
+  }
+  ::-webkit-scrollbar {
+    width: 18px;
+    background-color: #ffffff;
+  }
+  ::-webkit-scrollbar-track {
+    border-radius: 0;
+    background-color: #05053930;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background: linear-gradient(200deg, #040429 30%, #28286efe);
+  }
+
+  header {
+    background-color: #12132d;
+    color: white;
+    padding: 10px 20px;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 1.5em;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+  }
+
+  .nav-links li {
+    margin-right: 60px;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: white;
+  }
+
+  .loginBtn {
+    padding: 10px 40px;
+    background-color: #feffff;
+    border: none;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    font-size: 1em;
+    margin: 25px 0;
+    border-radius: 30px;
+    border: 1px solid #6f6f6f;
+    transition: background 1s linear, color 0.2s linear;
+  }
+  .loginBtn:hover {
+    background: linear-gradient(to right, #0d0f38, #0c1089, #1b22f4);
+    color: #fff;
+    border: 1px solid inherit;
+  }
+  .welcome {
+    font-size: 48px;
+    margin: 20px 0;
+    /* background-color: #121459; */
+    color: rgb(255, 255, 255);
+    font-weight: 900;
+    padding: 3px 10px;
+    font-weight: 500;
+  }
+  .welcome-p {
+    font-size: 18px;
+    margin: 20px 0;
+    /* background-color: #121459; */
+    color: #ffffff;
+    padding: 3px 2px;
+    font-weight: 800;
+  }
+  .main-content {
+    padding: 50px;
+    text-align: center;
+    height: 380px;
+    background: linear-gradient(#000000b5, #000000bb, #000000c4),
+      url("./media/corporate-banner.jpg") center/cover no-repeat;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .features,
+  h2,
+  ul {
+    margin-top: 20px;
+    color: #000000;
+    list-style: circle;
+  }
+  li {
+    margin: 5px 50px;
+  }
+  .cta,
+  .features {
+    padding: 40px 100px;
+    border: 1px solid #ababab;
+    margin: 40px 100px;
+    box-shadow: 0 2px 6px 4px #c9c9c9;
+  }
+  .testimonial {
+    margin-top: 40px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .cta {
+    margin-top: 40px;
+  }
+  .logo {
+    width: 20%;
+  }
+  .image-container {
+    text-align: center;
+  }
+
+  .image-container img {
+    max-width: 100%;
+    max-height: 50vh;
+  }
+
+  .fixed-form {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #000000ba;
+    padding: 50px 0 120px 0;
+  }
+  .close {
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+    background-color: #fff;
+    padding: 2px 7px;
+    position: absolute;
+    top: 3%;
+    right: 22%;
+    cursor: pointer;
+    transition: all 0.3s linear;
+  }
+  .close:hover {
+    background-color: red;
+    color: #fff;
+  }
+  h1 {
+    font-weight: bold;
+    margin: 0;
+  }
+
+  p {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 20px 0 30px;
+  }
+
+  span {
+    font-size: 12px;
+  }
+
+  a {
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 15px 0;
+  }
+
+  .container {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.2), 0 10px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    min-height: 600px;
+  }
+
+  .form-container form {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 0 30px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .social-container {
+    margin: 20px 0;
+  }
+
+  .social-container a {
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    height: 40px;
+    width: 40px;
+  }
+
+  .form-container input {
+    background: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+  }
+
+  button {
+    border-radius: 20px;
+    border: 1px solid #000000;
+    background: #000364;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+  }
+
+  button:active {
+    transform: scale(0.95);
+  }
+
+  button:focus {
+    outline: none;
+  }
+
+  button.ghost {
+    background: transparent;
+    border-color: #fff;
+  }
+
+  .form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+  }
+
+  .sign-in-container {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+  }
+
+  .sign-up-container {
+    left: 0;
+    width: 50%;
+    z-index: 1;
+    opacity: 0;
+  }
+
+  .overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+  }
+
+  .overlay {
+    background: #ff416c;
+    background: linear-gradient(to right, #111344, #1118f4) no-repeat 0 0 /
+      cover;
+    color: #fff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateY(0);
+    transition: transform 0.6s ease-in-out;
+  }
+
+  .overlay-panel {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+    height: 100%;
+    width: 50%;
+    text-align: center;
+    transform: translateY(0);
+    transition: transform 0.6s ease-in-out;
+  }
+
+  .overlay-right {
+    right: 0;
+    transform: translateY(0);
+  }
+
+  .overlay-left {
+    transform: translateY(-20%);
+  }
+
+  /* Move signin to right */
+  .container.right-panel-active .sign-in-container {
+    transform: translateY(100%);
+  }
+
+  /* Move overlay to left */
+  .container.right-panel-active .overlay-container {
+    transform: translateX(-100%);
+  }
+
+  /* Bring signup over signin */
+  .container.right-panel-active .sign-up-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+  }
+
+  /* Move overlay back to right */
+  .container.right-panel-active .overlay {
+    transform: translateX(50%);
+  }
+
+  /* Bring back the text to center */
+  .container.right-panel-active .overlay-left {
+    transform: translateY(0);
+  }
+
+  /* Same effect for right */
+  .container.right-panel-active .overlay-right {
+    transform: translateY(20%);
+  }
+
+  .footer {
+    margin-top: 25px;
+    text-align: center;
+  }
+
+  .icons {
+    display: flex;
+    width: 30px;
+    height: 30px;
+    letter-spacing: 15px;
+    align-items: center;
+  }
+</style>
+
+  </head>
+  <body>
+ 
+    <header>
+      <nav>
+        <div class="logo">Corporate Hiring</div>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/internshipPage#course">Courses</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="main-content">
+      <div style="color: #12132d">
+        <h1 class="welcome">Welcome to our TSAR-IT PVT LTD</h1>
+        <p class="welcome-p">
+          <q>
+            Empowering Excellence: Join Our Team and Shape the Future Together
+          </q>
+        </p>
+        <button onclick="showLogin()" class="loginBtn">Login</button>
+      </div>
+    </section>
+    <div class="features">
+      <h2>Key Features</h2>
+      <ul>
+        <li>Hands-on experience with real-world projects</li>
+        <li>Expert-led training sessions</li>
+        <li>Networking opportunities with industry professionals</li>
+        <li>Customizable learning paths</li>
+      </ul>
+    </div>
+
+    <div class="cta">
+      <h2 style="margin: 20px 0; font-size: 28px">
+        Ready to Start Your Journey?
+      </h2>
+      <p style="margin: 10px 10px; font-size: 14px; color: #000000">
+        Join our internship course and unlock a world of opportunities.
+      </p>
+      <!-- <button class="loginBtn" id="signupBtn">Sign Up Now</button> -->
+    </div>
+
+    <section class="fixed-form" id="fixedForm">
+      <b class="close" onclick="closeFixedForm()">✕</b>
+      <div class="container" id="container">
+        <div class="form-container sign-up-container">
+          <form action="#">
+            <h1>Create Account</h1>
+            <div class="social-container">
+              <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="social"
+                ><i class="fab fa-google-plus-g"></i
+              ></a>
+              <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <span>or use your email for registration</span>
+            <input type="text" placeholder="Name" />
+            <input type="email" placeholder="Business Email" />
+            <input type="password" placeholder="Password" />
+            <input type="text" placeholder="Company Name" />
+            <button>Sign Up</button>
+          </form>
+        </div>
+        <div class="form-container sign-in-container">
+          <form action="#">
+            <h1>Sign in</h1>
+            <div class="social-container">
+              <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="social"
+                ><i class="fab fa-google-plus-g"></i
+              ></a>
+              <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <span>or use your account</span>
+            <input type="email" placeholder="Email" />
+            <input type="password" placeholder="Password" />
+            <a href="#">Forgot your password?</a>
+            <button>Sign In</button>
+          </form>
+        </div>
+        <div class="overlay-container">
+          <div class="overlay">
+            <div class="overlay-panel overlay-left">
+              <h1>Welcome Back!</h1>
+              <p>
+                To keep connected with us please login with your personal info
+              </p>
+              <button class="ghost" id="signIn">Sign In</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+              <h1>Hello, Friend!</h1>
+              <p>Enter your personal details and start journey with us</p>
+              <button class="ghost" id="signUp">Login</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% include 'footer.html' %}
+    <script>
+      const signUpButton = document.getElementById("signUp");
+      const signInButton = document.getElementById("signIn");
+      const container = document.getElementById("container");
+      const fixedForm = document.getElementById("fixedForm");
+
+      signUpButton.addEventListener("click", () =>
+        container.classList.add("right-panel-active")
+      );
+
+      signInButton.addEventListener("click", () =>
+        container.classList.remove("right-panel-active")
+      );
+
+      let closeFixedForm = () => {
+        fixedForm.style.display = "none";
+      };
+      let showLogin = () => {
+        fixedForm.style.display = "flex";
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,359 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <script
+      src="https://kit.fontawesome.com/06a08d1706.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- <link rel="stylesheet" href="dashborad-style.css" /> -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+:root {
+  --primaryBackground: #212529;
+}
+::selection {
+  background-color: #050540;
+  color: #fff;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* line-height: 1.1; */
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+html {
+  scroll-behavior: smooth;
+}
+:before,
+:after {
+  box-sizing: border-box;
+}
+::-webkit-scrollbar {
+  width: 18px;
+  background-color: #ffffff;
+}
+::-webkit-scrollbar-track {
+  border-radius: 0;
+  background-color: #05053930;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  background: linear-gradient(200deg, #040429 30%, #28286efe);
+}
+a {
+  text-decoration: none;
+}
+header {
+  display: flex;
+  width: 100%;
+  padding: 15px 30px;
+  border-bottom: 1px solid #8e8e8e;
+}
+.company-logo {
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+.nav-items {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+.links {
+  color: #12132d;
+  position: relative;
+}
+.links::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 10%;
+  background-color: #12132d;
+  transition: all 0.3s linear;
+}
+.links:focus::after {
+  width: 100%;
+}
+.search {
+  border: 2px solid #929292;
+  padding: 4px 10px;
+  border-radius: 150px;
+  transition: all 0.1s linear;
+}
+.search:hover {
+  border: 2px solid #454545;
+  box-shadow: 0 2px 6px 2px #c9c9c9;
+}
+
+.search-input {
+  border: 0;
+  background-color: transparent;
+  padding: 4px 10px;
+  outline: none;
+}
+.search-input::placeholder {
+  font-style: italic;
+}
+.search-btn {
+  background-color: transparent;
+  padding: 4px 10px;
+  border: 0;
+  cursor: pointer;
+}
+
+.drop-details {
+  position: relative;
+}
+.drop-list {
+  display: none;
+  top: 0%;
+  left: -100%;
+  position: absolute;
+  width: 220px;
+  transform: translateY(20px);
+  opacity: 1;
+  animation: list 0.2s ease-in-out;
+  margin-top: 20px;
+  padding: 15px 10px;
+}
+.block-hover {
+  border: 1px solid #000;
+  padding: 0 0;
+}
+@keyframes list {
+  from {
+    transform: translateY(60px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(20px);
+    opacity: 1;
+  }
+}
+.drop-details:hover .drop-list {
+  display: block;
+}
+.drop-item {
+  margin: 2px 0;
+}
+
+.span-text {
+  color: #000;
+  display: flex;
+  gap: 20px;
+  transition: all 0.4s linear;
+  padding: 14px 20px;
+}
+.span-text:hover {
+  background-color: #050540;
+  color: #fff;
+}
+.span-text > i {
+  font-size: 20px;
+}
+.img-small {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.user-img {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #b1b1b1;
+  border-radius: 50%;
+}
+.drop-btn {
+  background-color: transparent;
+  border: 0;
+  transition: all 0.2s linear;
+}
+.drop-details:hover .drop-btn {
+  rotate: 180deg;
+}
+/* header styles end */
+/* main styles */
+
+.container {
+  border: 1px solid #000;
+  padding: 100px;
+}
+.header {
+  font-weight: 400;
+  margin: 20px 0;
+}
+.search-box {
+  border: 2px solid #9a9a9a;
+  padding: 0;
+  width: 70%;
+  margin: 10px 0;
+  border-radius: 3px;
+}
+.search-box:hover {
+  border: 2px solid #000;
+}
+.block {
+  padding: 10px 15px;
+  border: 0;
+  background-color: transparent;
+  outline: none;
+}
+.input {
+  width: 100%;
+}
+.btn {
+  cursor: pointer;
+}
+#output {
+  margin: 14px 0;
+  padding: 10px 10px;
+}
+.header-2 {
+  margin: 10px 0;
+}
+.span-box {
+  border: 1px solid #000;
+  padding: 5px 20px;
+}
+.span-op {
+  border: 1px solid #000;
+  font-size: 12px;
+  padding: 7px 25px;
+  border-radius: 30px;
+  margin: 0 5px;
+}
+.span-op:hover {
+  color: #0a0a96;
+}
+
+    </style>
+  </head>
+  <body>
+    
+    <header>
+      <div class="company-logo">
+        <img src="" alt="TSAR-IT Logo" />
+      </div>
+      <div class="nav-items">
+        <a href="#!" class="links">My Courses</a>
+        <a href="#!" class="links">My Resources</a>
+        <a href="#!" class="links">Mock Test</a>
+        <div class="search">
+          <input
+            type="search"
+            name=""
+            id=""
+            placeholder="Search for a couse..."
+            class="search-input"
+          />
+          <button class="search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+        <div class="user">
+          <div class="drop-details">
+            <div class="img-small">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQukleU1059SFH-flP36qRWECpm9pQfQ7f50Q&usqp=CAU" alt="user-png" class="user-img"/>
+            <button class="drop-btn">
+              <i class="fa-solid fa-caret-down"></i>
+            </button>
+            </div>
+            <div class="drop-list">
+                <div class="block-hover">
+                                <a href="/profileDashboard" class="a-link">
+              <div class="drop-item">
+                <span class="span-text"
+                  ><i class="fa-regular fa-user"></i> Profile</span
+                >
+              </div>
+            </a>
+            <a href="#!" class="a-link">
+              <div class="drop-item">
+                <span class="span-text"
+                  ><i class="fa-regular fa-file-lines"></i> Certificates</span
+                >
+              </div>
+            </a>
+            <a href="#!" class="a-link">
+              <div class="drop-item">
+                <span class="span-text"
+                  ><i class="fa-solid fa-square-pen"></i> Exam</span
+                >
+              </div>
+            </a>
+            <a href="#!" class="a-link">
+              <div class="drop-item">
+                <span class="span-text">
+                  <i class="fa-solid fa-receipt"></i>Invoices</span
+                >
+              </div>
+            </a>
+            <a href="#!" class="a-link">
+              <div class="drop-item">
+                <a href="/logOut_student" class="span-text"
+                  ><i class="fa-solid fa-right-from-bracket"></i> Logout</
+                >
+                </div>
+              </div>
+            </a>
+          </div>
+          </div>
+          
+        </div>
+      </div>
+    </header>
+    <section>
+      <div class="container">
+        <div class="main">
+          <h1 class="header">
+             <span id="user-name"><q> <u> {{ userName }} </u> </q></span><br>
+            Catch up with yours! Pick a Course and Start learning
+          </h1>
+          <div class="search-box">
+            
+              <div style="display: flex;">
+              <input type="search" name="courseName" id="courseName" placeholder="Search for a couse..." class="block input">
+            <button class="block btn" onclick="addTask()" id="enter"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            
+            </div>
+            <div id="output">
+             
+            </div>
+          </div>
+          <h1 class="header-2">Browse Category</h1>
+          <div style="display: flex; gap: 15px;">
+            <span class="span-box">message</span>
+          <span class="span-box">message</span>
+          <span class="span-box">message</span>
+          <span class="span-box">message</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      const addTask = () => {
+        var userInput = document.getElementById('courseName');
+        let element = document.getElementById('output');
+        let output = document.createElement('span');
+            output.setAttribute('class','span-op')
+            userInput.value = userInput.value.toLowerCase();
+            output.textContent = userInput.value
+            userInput.value = ''
+            element.appendChild(output);
+      }
+    </script>
+
+  </body>
+</html>

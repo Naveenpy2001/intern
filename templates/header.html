@@ -1,0 +1,826 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://kit.fontawesome.com/06a08d1706.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      /* nav bar styles */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+:root {
+  --primaryBackground: #212529;
+  --primaryfontcolor: #151872;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* line-height: 1.5; */
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+}
+
+:before,
+:after {
+  box-sizing: border-box;
+}
+
+.container-header {
+  width: 100%;
+  margin: 0 0;
+  display: flex;
+  justify-content: center;
+  z-index: 9999999999;
+  padding: 10px 0;
+  background-color: #fff;
+  border-bottom: 1px solid #535353;
+}
+
+.row {
+  display: flex;
+}
+
+.v-center {
+  align-items: center;
+  display: flex;
+  width: 100%;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  margin-top: 20px;
+}
+
+a {
+  text-decoration: none;
+  position: relative;
+}
+
+.bar::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background-color: #191a41;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  transition: all 0.2s linear;
+}
+
+.bar:hover::after {
+  width: 100%;
+}
+
+/* header */
+.stick {
+  position: sticky;
+  top: 0;
+}
+
+.header-main {
+  display: block;
+  width: 100%;
+  position: relative;
+  z-index: 99;
+  padding: 5px 0;
+}
+
+.header-main .item-left {
+  /* flex: 0 0 15%; */
+  width: 12%;
+  margin: 0 15px;
+}
+
+.header-main .logo-tsar a {
+  font-size: 30px;
+  color: #000000;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.header-main .item-center {
+  /* flex:0 0 95%; */
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.header-main .item-right {
+  /* flex: 0 0 10%; */
+  width: 10%;
+  display: flex;
+  justify-content: center;
+}
+
+.header-main .item-right a {
+  text-decoration: none;
+  font-size: 16px;
+  color: var(--primaryfontcolor);
+  display: inline-block;
+  margin-left: 10px;
+  transition: color 0.3s ease;
+}
+
+.header-main .menu>ul>li {
+  display: inline-block;
+  line-height: 50px;
+  margin-left: 25px;
+}
+
+.header-main .menu>ul>li>a {
+  font-size: 15px;
+  font-weight: 500;
+  color: #000;
+  position: relative;
+  text-transform: capitalize;
+  transition: color 0.3s ease;
+}
+
+.header-main .menu>ul>li .sub-menu {
+  position: absolute;
+  z-index: 500;
+  background-color: #ffffff;
+  box-shadow: -2px 2px 70px -25px rgba(0, 0, 0, 0.3);
+  padding: 20px 30px;
+  transition: all 0.5s ease;
+  margin-top: 25px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media (min-width: 992px) {
+  .header-main .menu>ul>li.menu-item-has-children:hover .sub-menu {
+    margin-top: 0;
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.header-main .menu>ul>li .sub-menu>ul>li {
+  line-height: 1;
+}
+
+.header-main .menu>ul>li .sub-menu>ul>li>a {
+  display: inline-block;
+  padding: 10px 0;
+  font-size: 15px;
+  color: #000;
+  transition: color 0.3s ease;
+  text-decoration: none;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.header-main .menu>ul>li .single-column-menu {
+  min-width: 280px;
+  max-width: 350px;
+}
+
+.header-main .menu>ul>li .sub-menu.mega-menu>.list-item>ul>li {
+  line-height: 1;
+  display: block;
+}
+
+.header-main .menu>ul>li .sub-menu.mega-menu>.list-item>ul>li>a {
+  padding: 10px 0;
+  display: inline-block;
+  font-size: 15px;
+  color: #000;
+  transition: color 0.3s ease;
+}
+
+.header-main .menu>ul>li .sub-menu.mega-menu {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.header-main .menu>ul>li .sub-menu.mega-menu-column-4 {
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px 10px;
+  overflow: hidden;
+}
+
+.header-main .menu>ul>li .sub-menu.mega-menu-column-4>.list-item {
+  flex: 0 0 10%;
+  flex-grow: 1;
+  padding: 5px 10px;
+}
+
+.header-main .menu>ul>li .sub-menu.mega-menu-column-4>.list-item .title {
+  font-size: 16px;
+  color: #e53525;
+  font-weight: 500;
+  line-height: 1;
+  padding: 10px 0;
+}
+
+.header-main .menu>ul>li .sub-menu.mega-menu-column-4>.list-item.text-center .title {
+  text-align: center;
+}
+
+.header-main .menu>ul>li .sub-menu.mega-menu>.list-item>ul>li>a:hover,
+.header-main .menu>ul>li .sub-menu>ul>li>a:hover,
+.header-main .item-right a:hover,
+.header-main .menu>ul>li:hover>a {
+  color: var(--primaryfontcolor);
+}
+
+.mobile-menu-head,
+.mobile-menu-trigger {
+  display: none;
+}
+
+/*responsive*/
+@media (max-width: 991px) {
+  .header-main .item-center {
+    order: 3;
+    flex: 0 0 100%;
+  }
+
+  .header-main .item-left,
+  .header-main .item-right {
+    flex: 0 0 auto;
+  }
+
+  .v-center {
+    justify-content: space-between;
+  }
+
+  .header-main .mobile-menu-trigger {
+    display: flex;
+    height: 30px;
+    width: 30px;
+    margin-left: 15px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header-main .mobile-menu-trigger span {
+    display: block;
+    height: 2px;
+    background-color: #333333;
+    width: 24px;
+    position: relative;
+  }
+
+  .header-main .mobile-menu-trigger span:before,
+  .header-main .mobile-menu-trigger span:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #333333;
+  }
+
+  .header-main .mobile-menu-trigger span:before {
+    top: -6px;
+  }
+
+  .header-main .mobile-menu-trigger span:after {
+    top: 6px;
+  }
+
+  .header-main .item-right {
+    align-items: center;
+  }
+
+  .header-main .menu {
+    position: fixed;
+    width: 320px;
+    background-color: #ffffff;
+    left: 0;
+    top: 0;
+    height: 100%;
+    overflow: hidden;
+    transform: translate(-100%);
+    transition: all 0.5s ease;
+    z-index: 1099;
+  }
+
+  .header-main .menu.active {
+    transform: translate(0%);
+  }
+
+  .header-main .menu>ul>li {
+    line-height: 1;
+    margin: 0;
+    display: block;
+  }
+
+  .header-main .menu>ul>li>a {
+    line-height: 50px;
+    height: 50px;
+    padding: 0 50px 0 15px;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .header-main .menu>ul>li>a i {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    top: 0;
+    right: 0;
+    text-align: center;
+    line-height: 50px;
+    transform: rotate(90deg);
+  }
+
+  .header-main .menu .mobile-menu-head {
+    display: flex;
+    height: 50px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 501;
+    position: sticky;
+    background-color: #ffffff;
+    top: 0;
+  }
+
+  .header-main .menu .mobile-menu-head .go-back {
+    height: 50px;
+    width: 50px;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    line-height: 50px;
+    text-align: center;
+    color: #000000;
+    font-size: 16px;
+    display: none;
+  }
+
+  .header-main .menu .mobile-menu-head.active .go-back {
+    display: block;
+  }
+
+  .header-main .menu .mobile-menu-head .current-menu-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #000000;
+  }
+
+  .header-main .menu .mobile-menu-head .mobile-menu-close {
+    height: 50px;
+    width: 50px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    line-height: 50px;
+    text-align: center;
+    color: #000000;
+    font-size: 25px;
+  }
+
+  .header-main .menu .menu-main {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .header-main .menu>ul>li .sub-menu.mega-menu,
+  .header-main .menu>ul>li .sub-menu {
+    visibility: visible;
+    opacity: 1;
+    position: absolute;
+    box-shadow: none;
+    margin: 0;
+    padding: 15px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 65px;
+    max-width: none;
+    min-width: auto;
+    display: none;
+    transform: translateX(0%);
+    overflow-y: auto;
+  }
+
+  .header-main .menu>ul>li .sub-menu.active {
+    display: block;
+  }
+
+  @keyframes slideLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateX(0%);
+    }
+  }
+
+  @keyframes slideRight {
+    0% {
+      opacity: 1;
+      transform: translateX(0%);
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  }
+
+  .header-main .menu>ul>li .sub-menu.mega-menu-column-4>.list-item img {
+    margin-top: 0;
+  }
+
+  .header-main .menu>ul>li .sub-menu.mega-menu-column-4>.list-item.text-center .title {
+    margin-bottom: 20px;
+  }
+
+  .header-main .menu>ul>li .sub-menu.mega-menu-column-4>.list-item.text-center:last-child .title {
+    margin-bottom: 0px;
+  }
+
+  .header-main .menu>ul>li .sub-menu.mega-menu-column-4>.list-item {
+    flex: 0 0 100%;
+    padding: 0px;
+  }
+
+  .header-main .menu>ul>li .sub-menu>ul>li>a,
+  .header-main .menu>ul>li .sub-menu.mega-menu>.list-item>ul>li>a {
+    display: block;
+  }
+
+  .header-main .menu>ul>li .sub-menu.mega-menu>.list-item>ul {
+    margin-bottom: 15px;
+  }
+
+  .menu-overlay {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1098;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s ease;
+  }
+
+  .menu-overlay.active {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+    </style>
+  </head>
+  <body>
+    {% block content %}
+    <header class="header-main stick">
+      <div class="container-header">
+        <div class="row v-center">
+          <div class="header-item item-left">
+            <div class="logo-tsar">
+              <a href="#">
+                <img
+                  src='{% static "../media/TSAR-IT.png" %}'
+                  alt=""
+                  width="50%"
+                />
+              </a>
+            </div>
+          </div>
+          <!-- menu start here -->
+          <div class="header-item item-center">
+            <div class="menu-overlay"></div>
+            <div class="menu">
+              <div class="mobile-menu-head">
+                <div class="go-back"><i class="fa fa-angle-left"></i></div>
+                <div class="current-menu-title"></div>
+                <div class="mobile-menu-close">&times;</div>
+              </div>
+              <ul class="menu-main">
+                <li>
+                  <a href="/">Home</a>
+                </li>
+
+                <li class="menu-item-has-children">
+                  <a href="#">Insights</a>
+                </li>
+                <li class="menu-item-has-children">
+                  <a href="#"
+                    >Industries <i class="fa-solid fa-caret-down"></i
+                  ></a>
+                  <div class="sub-menu mega-menu mega-menu-column-4">
+                    <div class="list-item">
+                      <ul>
+                        <li>
+                          <a href="/Aerospace" class="bar"
+                            >Aerospace & Defense
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/automotive" class="bar">Automotive </a>
+                        </li>
+                        <li>
+                          <a href="/Banking" class="bar">Banking </a>
+                        </li>
+                        <li>
+                          <a href="/capitalMarket" class="bar"
+                            >Capital Markets
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/Communications" class="bar"
+                            >Communications
+                          </a>
+                        </li>
+                      </ul>
+                      <!-- <h4 class="title"></h4> -->
+                      <ul>
+                        <li>
+                          <a href="/ConsumerElectronics" class="bar"
+                            >Consumer Electronics
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/consumerPackagedGoods" class="bar"
+                            >Consumer Packaged Goods
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/Education" class="bar">Education </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="list-item">
+                      <ul>
+                        <li>
+                          <a href="/EngineeringOperations" class="bar"
+                            >Engineering Construction & Operations
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/HealthCare" class="bar">Healthcare </a>
+                        </li>
+                        <li>
+                          <a href="/IndustrialProcess" class="bar"
+                            >Industrial & Process Manufacturing
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/insurance" class="bar">Insurance </a>
+                        </li>
+                        <li>
+                          <a href="/LifePharma" class="bar"
+                            >Life Sciences & Pharma
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/MediaServices" class="bar"
+                            >Media & Info Services
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/NaturalResources" class="bar"
+                            >Natural Resources
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="list-item">
+                      <ul>
+                        <li>
+                          <a href="/NetworkProviders" class="bar"
+                            >Network & Edge Providers
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/oilgas" class="bar">Oil & Gass </a>
+                        </li>
+                        <li>
+                          <a href="/SoftwareProducts" class="bar"
+                            >Platforms & Software Products
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/ProfessionalServices" class="bar"
+                            >Professional Services
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/PublicSector" class="bar">Public Sector </a>
+                        </li>
+                        <li>
+                          <a href="/Retail" class="bar">Retail</a>
+                        </li>
+                        <li>
+                          <a href="/Semiconductors" class="bar"
+                            >Semiconductors</a
+                          >
+                        </li>
+                        <li>
+                          <a href="/TransportationServices" class="bar"
+                            >Transportation & Services</a
+                          >
+                        </li>
+                        <li>
+                          <a href="/Utilities" class="bar">Utilities</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="menu-item-has-children">
+                  <a href="#">Energy <i class="fa-solid fa-caret-down"></i></a>
+                  <div class="sub-menu single-column-menu">
+                    <ul>
+                      <li>
+                        <a href="/solar" class="bar">Solar </a>
+                      </li>
+                      <li>
+                        <a href="/wind" class="bar"> Wind</a>
+                      </li>
+                      <li>
+                        <a href="/thermal" class="bar"> Thermal</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="menu-item-has-children">
+                  <a href="#"
+                    >Services <i class="fa-solid fa-caret-down"></i
+                  ></a>
+                  <div class="sub-menu mega-menu mega-menu-column-4">
+                    <div class="list-item">
+                      <ul>
+                        <li>
+                          <a href="/webDevelopment" class="bar"
+                            >Web Development</a
+                          >
+                        </li>
+                        <li>
+                          <a href="/appDevelopment" class="bar"
+                            >App Development</a
+                          >
+                        </li>
+                      </ul>
+                      <ul>
+                        <li>
+                          <a href="/BPOservices" class="bar">Bpo Projects</a>
+                        </li>
+                        <li>
+                          <a href="./gourmd" class="bar"
+                            >Background Verifications</a
+                          >
+                        </li>
+                        <li>
+                          <a href="satelite" class="bar">Satellite Projects</a>
+                        </li>
+                        <li>
+                          <a href="/civilConstructions" class="bar"
+                            >Civil Construction</a
+                          >
+                        </li>
+                        <li>
+                          <a href="/manPowerSupply" class="bar"
+                            >Manpower Supply</a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="list-item">
+                      <ul>
+                        <li>
+                          <a href="/PayrollJobs" class="bar">Payroll-Jobs</a>
+                        </li>
+                        <li>
+                          <a href="/NGO" class="bar">Ngo Consultancy</a>
+                        </li>
+                      </ul>
+                      <ul>
+                        <li>
+                          <a href="/photo_edting" class="bar"
+                            >Photo & Video Editing</a
+                          >
+                        </li>
+                        <li>
+                          <a href="/digitalmarketing" class="bar"
+                            >Digital Marketing</a
+                          >
+                        </li>
+                        <li>
+                          <a href="/Survey" class="bar">Survey</a>
+                        </li>
+                        <li>
+                          <a href="/distribution" class="bar">Distribution</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="menu-item-has-children">
+                  <a href="#">Investors</a>
+                </li>
+                <li class="menu-item-has-children">
+                  <a href="#"
+                    >Products <i class="fa-solid fa-caret-down"></i
+                  ></a>
+                  <div class="sub-menu single-column-menu">
+                    <ul>
+                      <li>
+                        <a href="/HMS" class="bar"
+                          >Hospital Management System
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/EMS" class="bar"
+                          >Education Management System
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/chatbot" class="bar">AI chat Bot</a>
+                      </li>
+                      <li>
+                        <a href="/recruitmanagement" class="bar"
+                          >Recruiter Management</a
+                        >
+                      </li>
+                      <li>
+                        <a href="/hrManagement" class="bar">HR Management</a>
+                      </li>
+                      <li>
+                        <a href="/financeManagement" class="bar"
+                          >Finance Management</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="menu-item-has-children">
+                  <a href="#">About <i class="fa-solid fa-caret-down"></i></a>
+                  <div class="sub-menu single-column-menu">
+                    <ul>
+                      <li>
+                        <a href="/about" class="bar">About Our company</a>
+                      </li>
+                      <li><a href="/csr" class="bar">CSR</a></li>
+                      <li><a href="/Media" class="bar">Media</a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="menu-item-has-children">
+                  <a href="#">Careers <i class="fa-solid fa-caret-down"></i></a>
+                  <div class="sub-menu single-column-menu">
+                    <ul>
+                      <li>
+                        <a href="/jobPage" class="bar">Jobs</a>
+                      </li>
+                      <li>
+                        <a href="/internshipPage" class="bar">Interships</a>
+                      </li>
+                      <li>
+                        <a href="/LifteAtTSARIT" class="bar">Life at TSAR</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <a href="/contact">Contact Us</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- menu end here -->
+          <div class="header-item item-right">
+            <a href="#" style="color: #000; font-size: 20px"
+              ><i class="fa-solid fa-globe"></i
+            ></a>
+            <!-- mobile menu trigger -->
+            <div class="mobile-menu-trigger">
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <script src='{% static "./JavaScript/script.js" %}'></script>
+    {% endblock %}
+  </body>
+</html>
