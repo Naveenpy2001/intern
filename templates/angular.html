@@ -861,63 +861,54 @@
       </div>
       <div class="flex-form" id="pop-form">
         <div class="form-background">
-          <form action="#" class="pop-up-form overlay enqury-banner">
-            <span class="cancel" onclick="closeForm()">✕</span>
+      <form method="post" action="/course-form/" class="pop-up-form overlay enqury-banner">
+        {% csrf_token %}
+        <span class="cancel" onclick="closeForm()">✕</span>
 
-            <img src="./media/TSAR-IT.png" alt="c-logo" width="20%" />
-            <h1 class="pop-h1">Quick Enquiry</h1>
-            <div class="pop-block">
-              <input
-                type="text"
-                placeholder="Name*"
-                class="user-input"
-                required
-                autocomplete="off"
-                name="username"
-                id="username"
-              />
-            </div>
-            <div class="pop-block">
-              <input
-                type="text"
-                placeholder="Email*"
-                class="user-input"
-                required
-                autocomplete="off"
-                name="useremail"
-                id="useremail"
-              />
-            </div>
-            <div class="pop-block">
-              <input
-                type="text"
-                placeholder="Mobile No.*"
-                class="user-input"
-                required
-                autocomplete="off"
-                name="userphno"
-                id="userphno"
-              />
-            </div>
-            <div class="pop-block">
-              <select name="options" id="options" class="user-input">
+        <img src="./media/TSAR-IT.png" alt="c-logo" width="20%" />
+        <h1 class="pop-h1">Quick Enquiry</h1>
+
+        <div class="pop-block">
+            <input type="text" name="name" placeholder="Name*" class="user-input" required id="username" value="{{ form.name.value }}">
+            {% for error in form.name.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="pop-block">
+            <input type="email" name="email" placeholder="Email*" class="user-input" required id="useremail" value="{{ form.email.value }}">
+            {% for error in form.email.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="pop-block">
+            <input type="text" name="phone_number" placeholder="Mobile No.*" class="user-input" required id="userphno" value="{{ form.phone_number.value }}">
+            {% for error in form.phone_number.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="pop-block">
+            <select name="looking_for" id="options" class="user-input" required>
                 <option value="">Looking for</option>
-                <option value="">Self</option>
-                <option value="">Others</option>
-              </select>
-            </div>
-            <div class="check">
-              <input type="checkbox" name="usercheck" id="usercheck" />
-              <span
-                >I hearby agree to the
-                <a href="#" class="terms">Terms and Condtions</a> and
-                <a href="#" class="terms">Privacy Policy</a> of TSAR IT</span
-              >
-            </div>
-            <div class="pop-btn">
-              <button class="form-submit">submit</button>
-            </div>
-          </form>
+                <option value="Self" {% if form.looking_for.value == "Self" %}selected{% endif %}>Self</option>
+                <option value="Others" {% if form.looking_for.value == "Others" %}selected{% endif %}>Others</option>
+            </select>
+            {% for error in form.looking_for.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="check">
+            <input type="checkbox" name="agree_terms" id="usercheck" {% if form.agree_terms.value %}checked{% endif %}>
+            {% for error in form.agree_terms.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+            <span>
+                I hereby agree to the <a href="#" class="terms">Terms and Conditions</a> and <a href="#" class="terms">Privacy Policy</a> of TSAR IT
+            </span>
+        </div>
+        <div class="pop-btn">
+            <button type="submit" class="form-submit">Submit</button>
+        </div>
+    </form>
         </div>
       </div>
     </section>
