@@ -24,9 +24,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index),
+    path('index', views.index),
     path('CorporateLogin',views.CorporateLogin),
-    path('internshipPage',views.internshipPage),
+    path('',views.internshipPage),
     path('studentDashboard',views.studentDashboard),
     path('studentLogin',views.studentLogin),
     path('registrationForm',views.registrationForm),
@@ -43,9 +43,22 @@ urlpatterns = [
     path('reactJs',views.reactJs),
     path('salesforce',views.salesforce),
     path('sap',views.sap),
+    path('profileDashboard',views.profileDashboard),
+
+    path('success/', views.success_view, name='success'),
+
+    # main URLS
+    path('enquiry_view',views.enquiry_view),
+    path('register/', views.register, name='register'),
+    path('login/', views.login_view, name='login'),
+    path('studentDashboard/', views.student_dashboard, name='student_dashboard'),
 
 
+
+    path('course-form/', views.course_form_view, name='course_form'),
 ]
+
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     

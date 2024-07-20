@@ -15,13 +15,35 @@ def CorporateLogin(request):
 
 
 def internshipPage(request):
-    return render(request,'internship-page.html')
+    language = [
+        "select",
+        "Python",
+        "Java",
+        "Big data",
+        'React JS',
+        "Angular",
+        "AWS",
+        "Data Science",
+        "Sales Force",
+        "Azure",
+        "Cloud",
+        " .Net",
+        "Digital Marketing",
+        "Web Development",
+        "Machine Learning",
+        "Other."
+ ]
+    
+    return render(request,'internship-page.html',{'language':language})
 
 def studentDashboard(request):
     return render(request,'student-dashboard.html')
 
 def studentLogin(request):
     return render(request,'student-login.html')
+
+def profileDashboard(request):
+    return render(request,'profile-dashboard.html')
 
 def registrationForm(request):
     languages = [
@@ -113,3 +135,118 @@ def salesforce(request):
 
 def sap(request):
     return render(request,'sap.html')
+
+
+def success_view(request):
+    return render(request, 'success.html')
+
+from django.shortcuts import render, redirect
+from .models import Enquiry
+
+def enquiry_view(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone_number = request.POST.get('phone_number')
+        course = request.POST.get('course')
+        country = request.POST.get('country')
+        state = request.POST.get('state')
+        looking_for = request.POST.get('looking_for')
+
+        Enquiry.objects.create(
+            name=name,
+            email=email,
+            phone_number=phone_number,
+            course=course,
+            country=country,
+            state=state,
+            looking_for=looking_for
+        )
+        return redirect('success')  # Redirect to a success page or another view
+    return render(request, 'internship-page.html')
+
+
+
+# views.py
+
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from .forms import UserRegisterForm, UserLoginForm
+from .models import Profile
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.email  # Set username to email for unique constraint
+            user.save()
+            Profile.objects.create(
+                user=user,
+                name=form.cleaned_data.get('name'),
+                email=form.cleaned_data.get('email'),
+                phone_number=form.cleaned_data.get('phone_number'),
+                resume=form.cleaned_data.get('resume'),
+                resume_headline=form.cleaned_data.get('resume_headline'),
+            )
+            return redirect('login')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'student-login.html', {'form': form})
+
+def login_view(request):
+    if request.method == 'POST':
+        form = UserLoginForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=email, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('student_dashboard')
+    else:
+        form = UserLoginForm()
+    return render(request, 'student-login.html', {'form': form})
+
+@login_required
+def student_dashboard(request):
+    return render(request, 'student-dashboard.html')
+
+
+
+
+from django.shortcuts import render, redirect
+from .forms import CoursesFormsForm
+
+def course_form_view(request):
+    if request.method == 'POST':
+        form = CoursesFormsForm(request.POST)
+        if form.is_valid():
+            # course_form = form.save(commit=False)
+            course_form = form.save()
+            course_form.course_name = "Angular"  # Set the course name here
+            course_form.save()
+            return redirect('success')  # Redirect to a success page
+        else:
+            print(form.errors)
+    else:
+        form = CoursesFormsForm()
+
+    return render(request, 'angular.html', {'form': form})
+
+def course_form_view(request):
+    if request.method == 'POST':
+        form = CoursesFormsForm(request.POST)
+        if form.is_valid():
+            # course_form = form.save(commit=False)
+            course_form = form.save()
+            course_form.course_name = "AWS"  # Set the course name here
+            course_form.save()
+            return redirect('success')  # Redirect to a success page
+        else:
+            print(form.errors)
+    else:
+        form = CoursesFormsForm()
+
+    return render(request, 'aws.html', {'form': form})

@@ -22,7 +22,6 @@
         /* line-height: 1.1; */
         font-family: "Raleway", "Poppins", sans-serif;
         font-weight: 500;
-        text-transform: capitalize;
       }
       html {
         scroll-behavior: smooth;
@@ -813,80 +812,88 @@
     </section>
 
     <div class="get-in-form">
-      <div id="formContainer" class="form-container">
-        <form class="myform">
-          <div class="logo-img-c">
-            <img src="./media/TSAR-IT.png" alt="" class="c-logo-1" />
-            <h1>Enquiry</h1>
-          </div>
-          <div class="block">
-            <input
-              type="text"
-              name="username"
-              id="username"
-              class="input-field"
-              placeholder="Name*"
-              autocomplete="off"
-              required
-            />
-          </div>
-          <div class="block">
-            <input
-              type="email"
-              name="useremail"
-              id="useremail"
-              class="input-field"
-              placeholder="email *"
-              autocomplete="off"
-              required
-            />
-          </div>
-          <div class="block">
-            <input
-              type="number"
-              name="userphno"
-              id="userphno"
-              class="input-field"
-              placeholder="phno *"
-              autocomplete="off"
-              required
-            />
-          </div>
-          <div class="block-select">
-            <select name="" id="" class="select">
-              <option value="">Course</option>
-            </select>
-          </div>
-          <div class="block-select">
-            <select name="" id="" class="select">
-              <option value="">Country</option>
-            </select>
-          </div>
-          <div class="block-select">
-            <select name="" id="" class="select">
-              <option value="">State</option>
-            </select>
-          </div>
-          <div class="block-select">
-            <select name="" id="" class="select">
-              <option value="">Loaction</option>
-            </select>
-          </div>
-          <div class="block-select">
-            <select name="" id="" class="select">
-              <option value="">Looking for?</option>
-              <option value="">self</option>
-              <option value="">Others</option>
-            </select>
-          </div>
-          <div class="block-btn">
-            <button class="submit-btn">Submit</button>
-            <button class="close-button" onclick="closeForm('formContainer')">
-              ✕
-            </button>
-          </div>
+    <div id="formContainer" class="form-container">
+        <form method="post" action="/enquiry_view" class="myform">
+            {% csrf_token %}
+            <div class="logo-img-c">
+                <img src="{% static 'media/TSAR-IT.png' %}" alt="" class="c-logo-1" />
+                <h1>Enquiry</h1>
+            </div>
+            <div class="block">
+                <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    class="input-field"
+                    placeholder="Name*"
+                    autocomplete="off"
+                    required
+                />
+            </div>
+            <div class="block">
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    class="input-field"
+                    placeholder="Email*"
+                    autocomplete="off"
+                    required
+                />
+            </div>
+            <div class="block">
+                <input
+                    type="text"
+                    name="phone_number"
+                    id="phone_number"
+                    class="input-field"
+                    placeholder="Phone Number*"
+                    autocomplete="off"
+                    required
+                />
+            </div>
+            <div class="block-select">
+
+                <select name="course" id="course" class="select" required>
+
+                  <option value="" disabled selected>Course</option>
+                  {% for lang in language %}
+                    <option value="{{ lang }}">{{ lang }}</option>
+                    {% endfor %}
+                    <!-- Add course options here -->
+                </select>
+            </div>
+            <div class="block-select">
+                <select name="country" id="country" class="select" required>
+                    <option value="" disabled selected>Country</option>
+                    <option value="tirupati">turpati</option>
+
+                    <!-- Add country options here -->
+                </select>
+            </div>
+            <div class="block-select">
+                <select name="state" id="state" class="select" required>
+                    <option value="" disabled selected>State</option>
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+
+                    <!-- Add state options here -->
+                </select>
+            </div>
+            <div class="block-select">
+            </div>
+            <div class="block-select">
+                <select name="looking_for" id="looking_for" class="select" required>
+                    <option value="" disabled selected>Looking for?</option>
+                    <option value="self">Self</option>
+                    <option value="others">Others</option>
+                </select>
+            </div>
+            <div class="block-btn">
+                <button type="submit" class="submit-btn">Submit</button>
+                <button type="button" class="close-button" onclick="closeForm('formContainer')">✕</button>
+            </div>
         </form>
-      </div>
+    </div>
     </div>
 
     <section class="sec flex-sec reveal" id="course">
@@ -1302,6 +1309,7 @@
       </footer>
     </section>
     <section>
+  {% include 'footer.html' %}
       
     </section>
     <!-- <script src="./JavaScript/scroll.js"></script> -->

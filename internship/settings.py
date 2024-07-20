@@ -74,6 +74,7 @@ WSGI_APPLICATION = 'internship.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+<<<<<<< HEAD
 #DATABASES = {
 #    'default': {
 #       'ENGINE': 'django.db.backends.mysql',
@@ -92,6 +93,18 @@ WSGI_APPLICATION = 'internship.wsgi.application'
     # }
 #}
 
+=======
+# DATABASES = {
+#     'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'intern',        # Replace 'your_database_name' with your actual database name
+#         'USER': 'root',       # Replace 'your_mysql_username' with your MySQL username
+#         'PASSWORD': 'root',   # Replace 'your_mysql_password' with your MySQL password
+#         'HOST': 'localhost',                 # Replace 'localhost' with your MySQL host if it's not running locally
+#         'PORT': '3306', 
+#     }
+# }
+>>>>>>> 0244c9a0709a14339734634d49541dbcc0766af2
 
 DATABASES = {
     'default': {
@@ -100,8 +113,11 @@ DATABASES = {
     }
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 0244c9a0709a14339734634d49541dbcc0766af2
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -126,7 +142,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
+
 
 USE_I18N = True
 
@@ -142,7 +159,15 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'staticfiles'),
 ]
 
+<<<<<<< HEAD
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+=======
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'your_app.backends.EmailAuthBackend',  # Add your custom backend
+)
+
+>>>>>>> 0244c9a0709a14339734634d49541dbcc0766af2
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -150,8 +175,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 EMAIL_HOST = 'smtp.gmail.com'
