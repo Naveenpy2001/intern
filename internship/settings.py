@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-4_6-7rxf_g07s7h_sy#2js)^6uq=b(zjb8gh3s7dcgu2g-pi1k
 DEBUG = True
 
 # ALLOWED_HOSTS = ["intern.tsaritservices.com"]
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -74,15 +74,15 @@ WSGI_APPLICATION = 'internship.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-       'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'demo',        # Replace 'your_database_name' with your actual database name
-        'USER': 'root',       # Replace 'your_mysql_username' with your MySQL username
-        'PASSWORD': 'root',   # Replace 'your_mysql_password' with your MySQL password
-        'HOST': 'localhost',                 # Replace 'localhost' with your MySQL host if it's not running locally
-        'PORT': '3306', 
-    }
+#DATABASES = {
+#    'default': {
+#       'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'demo',        # Replace 'your_database_name' with your actual database name
+#        'USER': 'root',       # Replace 'your_mysql_username' with your MySQL username
+#        'PASSWORD': 'root',   # Replace 'your_mysql_password' with your MySQL password
+#        'HOST': 'localhost',                 # Replace 'localhost' with your MySQL host if it's not running locally
+#        'PORT': '3306', 
+#    }
     # 'default': {
     #    'ENGINE': 'django.db.backends.mysql',
     #     'NAME': 'fikwzpdr_intern',        # Replace 'your_database_name' with your actual database name
@@ -90,7 +90,16 @@ DATABASES = {
     #     'PASSWORD': 'Tsarit@12345',   # Replace 'your_mysql_password' with your MySQL password               
     #     'PORT': '3306',  
     # }
+#}
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
+
 
 
 # Password validation
@@ -127,10 +136,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'staticfiles'),
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
