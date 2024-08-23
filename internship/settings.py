@@ -80,6 +80,41 @@ WSGI_APPLICATION = 'internship.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+#DATABASES = {
+#    'default': {
+#       'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'demo',        # Replace 'your_database_name' with your actual database name
+#        'USER': 'root',       # Replace 'your_mysql_username' with your MySQL username
+#        'PASSWORD': 'root',   # Replace 'your_mysql_password' with your MySQL password
+#        'HOST': 'localhost',                 # Replace 'localhost' with your MySQL host if it's not running locally
+#        'PORT': '3306', 
+#    }
+    # 'default': {
+    #    'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'fikwzpdr_intern',        # Replace 'your_database_name' with your actual database name
+    #     'USER': 'fikwzpdr_intern',       # Replace 'your_mysql_username' with your MySQL username
+    #     'PASSWORD': 'Tsarit@12345',   # Replace 'your_mysql_password' with your MySQL password               
+    #     'PORT': '3306',  
+    # }
+#}
+
+=======
+# DATABASES = {
+#     'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'intern',        # Replace 'your_database_name' with your actual database name
+#         'USER': 'root',       # Replace 'your_mysql_username' with your MySQL username
+#         'PASSWORD': 'root',   # Replace 'your_mysql_password' with your MySQL password
+#         'HOST': 'localhost',                 # Replace 'localhost' with your MySQL host if it's not running locally
+#         'PORT': '3306', 
+#     }
+# }
+>>>>>>> 0244c9a0709a14339734634d49541dbcc0766af2
+
+>>>>>>> 0c1fd01fedbb4000a8129d725f007323cc6ffe7e
 DATABASES = {
     'default': {
        'ENGINE': 'django.db.backends.mysql',
@@ -91,6 +126,7 @@ DATABASES = {
     }
 }
 
+<<<<<<< HEAD
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -98,6 +134,13 @@ DATABASES = {
 #     }
 # }
 
+=======
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 0244c9a0709a14339734634d49541dbcc0766af2
+>>>>>>> 0c1fd01fedbb4000a8129d725f007323cc6ffe7e
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -133,16 +176,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'staticfiles'),
 ]
 
+<<<<<<< HEAD
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+=======
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'your_app.backends.EmailAuthBackend',  # Add your custom backend
 )
 
+>>>>>>> 0244c9a0709a14339734634d49541dbcc0766af2
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
