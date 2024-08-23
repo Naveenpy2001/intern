@@ -1,14 +1,37 @@
 from django.db import models
+from django.conf import settings
+from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
+# Custom User Model
+class CustomUser(AbstractUser):
+    email = models.EmailField(unique=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
+
+    def __str__(self):
+        return self.email
+
+# Profile Model
+class Profile(models.Model):
+    # user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    email = models.EmailField(unique=True)
+    phone_number = models.CharField(max_length=15, blank=True, null=True)
+    resume = models.TextField(blank=True, null=True)
+    resume_headline = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return self.user.email
+
+# Other Models
 class InternSHip(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=14)
-    
 
 class studentRegister(models.Model):
-    firstr_name = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     date = models.CharField(max_length=100)
     gender = models.CharField(max_length=100)
@@ -21,32 +44,10 @@ class studentRegister(models.Model):
     alt_phoneNo = models.CharField(max_length=100)
     selected_course = models.CharField(max_length=100)
     referred_HR = models.CharField(max_length=100)
-    addition_comments = models.TextField()
+    additional_comments = models.TextField()
     profile_img = models.ImageField(upload_to='uploads/')
     transaction_ID = models.CharField(max_length=100)
     timestamp = models.DateTimeField(auto_now_add=True)
-
-
-
-# models.py
-
-from django.db import models
-from django.contrib.auth.models import User
-
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    email = models.EmailField(unique=True)
-    phone_number = models.CharField(max_length=15, blank=True, null=True)
-    resume = models.TextField(blank=True, null=True)
-    resume_headline = models.CharField(max_length=255, blank=True, null=True)
-
-    def __str__(self):
-        return self.name
-
-
-
-from django.db import models
 
 class Enquiry(models.Model):
     name = models.CharField(max_length=100)
@@ -61,16 +62,13 @@ class Enquiry(models.Model):
     def __str__(self):
         return self.name
 
-
-from django.db import models
-
 class CoursesForms(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone_number = models.CharField(max_length=15)
     looking_for = models.CharField(max_length=50)
     agree_terms = models.BooleanField()
-    course_name = models.CharField(max_length=50, default="",blank=True)
+    course_name = models.CharField(max_length=50, default="", blank=True)
 
     def __str__(self):
         return self.name

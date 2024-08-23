@@ -50,8 +50,8 @@ urlpatterns = [
     # main URLS
     path('enquiry_view',views.enquiry_view),
     path('register/', views.register, name='register'),
-    path('login/', views.login_view, name='login'),
-    path('studentDashboard/', views.student_dashboard, name='student_dashboard'),
+    path('login/', views.student_login, name='student_login'),
+    path('dashboard/', views.student_dashboard, name='student_dashboard'),
 
 
 

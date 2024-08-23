@@ -42,6 +42,43 @@ def studentDashboard(request):
 def studentLogin(request):
     return render(request,'student-login.html')
 
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
+from .forms import UserRegisterForm
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(request, email=email, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('student_dashboard')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'accounts/register.html', {'form': form})
+
+def student_login(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('student_dashboard')
+    return render(request, 'accounts/student_login.html')
+
+def student_dashboard(request):
+    return render(request, 'student-dashboard.html')
+
+
+
+
+
 def profileDashboard(request):
     return render(request,'profile-dashboard.html')
 
@@ -49,7 +86,7 @@ def registrationForm(request):
     languages = [
         "select",
         "Python",
-        "Java",
+        "Full Stack Java",
         "Big data",
         'React JS',
         "Angular",
@@ -166,52 +203,6 @@ def enquiry_view(request):
     return render(request, 'internship-page.html')
 
 
-
-# views.py
-
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, UserLoginForm
-from .models import Profile
-
-def register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.email  # Set username to email for unique constraint
-            user.save()
-            Profile.objects.create(
-                user=user,
-                name=form.cleaned_data.get('name'),
-                email=form.cleaned_data.get('email'),
-                phone_number=form.cleaned_data.get('phone_number'),
-                resume=form.cleaned_data.get('resume'),
-                resume_headline=form.cleaned_data.get('resume_headline'),
-            )
-            return redirect('login')
-    else:
-        form = UserRegisterForm()
-    return render(request, 'student-login.html', {'form': form})
-
-def login_view(request):
-    if request.method == 'POST':
-        form = UserLoginForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data.get('email')
-            password = form.cleaned_data.get('password')
-            user = authenticate(request, username=email, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('student_dashboard')
-    else:
-        form = UserLoginForm()
-    return render(request, 'student-login.html', {'form': form})
-
-@login_required
-def student_dashboard(request):
-    return render(request, 'student-dashboard.html')
 
 
 

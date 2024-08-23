@@ -329,22 +329,22 @@
             <textarea name="msg" id="msg" cols="40" rows="4"></textarea>
             <!-- code for taking user -->
             <div class="block" style="width: 100%">
-              <label for="">upload image</label>
-              <input type="file" name="profile_img" id="" accept=".jpg, .jpeg, .png" />
-            </div>
             <div class="qr-scanner">
               <div class="qr-img">
-                <img src="./media/qr-scanner.png" alt="TSAR-IT || QR-code"  width="40%"/>
-                <h2>Registration Fee : ₹200/-
+                <h2>Registration Fee : ₹500/-
                 <p style="font-size:13px; font-weight:400; text-align:center;">Amount Is Not Refundable.*</p>
                 </h2>
-                
               </div>
-              <div class="text">scan for pay</div>
+              {% comment %} <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_Oo1ZcFA0kdPqOn" async> </script> </form> {% endcomment %}
+               <form id="razorpay-form">
+    <script src="https://checkout.razorpay.com/v1/payment-button.js"
+            data-payment_button_id="pl_Oo1ZcFA0kdPqOn"
+            async>
+    </script>
+</form>
+
             </div>
-            <div class="block" style="width: 100%">
-              <p>Enter transaction ID : <input type="text" name="trans_id" id="" /></p>
-            </div>
+           
             <center><button class="submit">Submit</button></center>
           </form>
         </div>

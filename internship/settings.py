@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-4_6-7rxf_g07s7h_sy#2js)^6uq=b(zjb8gh3s7dcgu2g-pi1k
 DEBUG = True
 
 # ALLOWED_HOSTS = ["intern.tsaritservices.com"]
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app'
 ]
+
+
+AUTH_USER_MODEL = 'app.CustomUser'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -71,26 +75,28 @@ TEMPLATES = [
 WSGI_APPLICATION = 'internship.wsgi.application'
 
 
+
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'intern',        # Replace 'your_database_name' with your actual database name
-#         'USER': 'root',       # Replace 'your_mysql_username' with your MySQL username
-#         'PASSWORD': 'root',   # Replace 'your_mysql_password' with your MySQL password
-#         'HOST': 'localhost',                 # Replace 'localhost' with your MySQL host if it's not running locally
-#         'PORT': '3306', 
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+       'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'internnn',        # Replace 'your_database_name' with your actual database name
+        'USER': 'root',       # Replace 'your_mysql_username' with your MySQL username
+        'PASSWORD': 'root',   # Replace 'your_mysql_password' with your MySQL password
+        'HOST': 'localhost',                 # Replace 'localhost' with your MySQL host if it's not running locally
+        'PORT': '3306', 
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
